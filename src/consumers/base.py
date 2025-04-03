@@ -8,7 +8,6 @@ from pika.adapters.select_connection import SelectConnection
 from pika.exchange_type import ExchangeType
 from rich.console import Console
 from rich.panel import Panel
-from agents import Runner
 
 LOGGER = logging.getLogger(__name__)
 console = Console()
@@ -144,15 +143,11 @@ class TopicConsumer(object):
     async def process_message(self, body):
         agent = self._agent_registry[self._agent_id]
         prompt = f"You received a message on the {self._topic_type} topic: {body}\n"
-        if self._topic_type == "poems":
-            prompt += "Please write a poem inspired by this message."
-        elif self._topic_type == "jokes":
-            prompt += "Please tell a joke related to this message."
         
-        result = await Runner.run(agent, prompt)
+        result = await agent.ainvoke({"messages": [("user", prompt)]})
         LOGGER.info('Agent response received')
         console.print(Panel(
-            result.final_output,
+            result['messages'][-1].content,
             title=f"[bold green]{self._topic_type.upper()} Response[/bold green]",
             subtitle=f"[bold blue]Message: {body}[/bold blue]",
             width=console.width,
