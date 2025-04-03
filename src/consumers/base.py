@@ -142,7 +142,7 @@ class TopicConsumer(object):
 
     async def process_message(self, body):
         agent = self._agent_registry[self._agent_id]
-        prompt = f"You received a message on the {self._topic_type} topic: {body}\n"
+        prompt = f"You are subscribed to the {self._topic_type} topic. You received a message on the topic: {body}\n"
         
         result = await agent.ainvoke({"messages": [("user", prompt)]})
         LOGGER.info('Agent response received')
