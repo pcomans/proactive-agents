@@ -22,7 +22,7 @@ A Python project demonstrating asynchronous agent-based communication using Rabb
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd asynchronous-agents
+cd proactive-agents
 ```
 
 2. Install dependencies using Poetry:
@@ -66,11 +66,16 @@ The system supports the following topics:
 - `poems.*` - For poetry generation
 - `limericks.*` - For limerick generation
 
+The Sender will publish different nouns to these topics that act as writing prompts for the subscribers.
+
 ## Agents
 
-The system includes two specialized agents:
-1. Poetry Agent - Subscribes to poetry-related topics
-2. Joking Agent - Subscribes to joke-related topics
+The system includes two specialized agents with different missions.
+1. Poetry Agent - Writes poetry
+2. Joking Agent - Writes jokes
+
+**Both agents have access to the available topics and will decide themselves what topics to subscribe to.**
+In reality this means that they sometimes decide to subscribe to the limericks queue, sometimes not.
 
 Each agent can:
 - Subscribe to relevant topics
