@@ -1,4 +1,4 @@
-# Asynchronous Agents
+# Proactive Agents
 
 A Python project demonstrating asynchronous agent-based communication using RabbitMQ and OpenAI. This project implements a message-based system where specialized agents can subscribe to topics and process messages asynchronously.
 
